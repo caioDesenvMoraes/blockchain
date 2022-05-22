@@ -9,7 +9,7 @@ class Block {
         this.data = data
     }
 
-    // função que retorna uma string
+    // método que retorna uma string
     toString() {
         return `Block
         timestamp = ${this.timestamp}
@@ -18,12 +18,12 @@ class Block {
         data = ${this.data}`
     }
 
-    // bloco genesis
+    // método do bloco genesis
     static genesis() {
         return new this("Genesis Time", "----------", "JSHE123SSHA2", [])
     }
 
-    // bloco de mineração
+    // método do bloco de mineração
     static mineBlock(lastBlock, data) {
         const timestamp = Date.now()
         const lastHash = lastBlock.hash
@@ -32,9 +32,16 @@ class Block {
         return new this(timestamp, lastHash, hash, data)
     }
 
-    // hash SHA256
+    // método para criar um hash SHA256
     static hash(timestamp, lastHash, data) {
         return SHA256(`${timestamp}${lastHash}${data}`).toString()
+    }
+
+    // método para validar o hash do bloco
+    static blockHash(block) {
+        const {timestamp, lastHash, data} = block
+        
+        return Block.hash(timestamp, lastHash, data)
     }
 }
 
