@@ -1,6 +1,7 @@
 // imporando os métodos
 const express = require("express")
 const Blockchain = require("../blockchain")
+const P2PServer = require("./p2p-server")
 
 // definindo a porta
 const HTTP_PORT = process.env.HTTP_PORT || 3001
@@ -8,6 +9,7 @@ const HTTP_PORT = process.env.HTTP_PORT || 3001
 // instanciando os objetos
 const app = express()
 const bc = new Blockchain()
+const p2pServer = new P2PServer(bc)
 
 // recebendo os dados no formato json
 app.use(express.json())
@@ -26,3 +28,4 @@ app.post("/mine", (req, res) => {
 })
 
 app.listen(HTTP_PORT, () => console.log(`Listening on port ${HTTP_PORT}`))
+p2pServer.listen()
