@@ -23,7 +23,7 @@ class Block {
         return new this("Genesis Time", "----------", "JSHE123SSHA2", [])
     }
 
-    // método do bloco de mineração
+    // método para criação de um bloco de mineração
     static mineBlock(lastBlock, data) {
         const timestamp = Date.now()
         const lastHash = lastBlock.hash
