@@ -1,11 +1,8 @@
-const Block = require("./block")
+const Blockchain = require("./blockchain/index")
 
-// instânciando um objeto do bloco
-const block = new Block("7467", "765EQHR45HAAR54", "3455HEE34EJL65HL3", "100")
+const bc = new Blockchain()
 
-console.log(block.toString())
-console.log(Block.genesis().toString())
-
-// criando nosso primeiro bloco
-const primeiroBloco = Block.mineBlock(Block.genesis(), "$500")
-console.log(primeiroBloco.toString())
+for (let i = 1; i < 10; i++) {
+    let block = bc.addBlock({index: i, amount: 500})
+    console.log(block);
+}

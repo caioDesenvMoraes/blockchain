@@ -14,7 +14,7 @@ const p2pServer = new P2PServer(bc)
 // recebendo os dados no formato json
 app.use(express.json())
 
-// método get para enviar a corrente de blocos
+// método get para mostrar a corrente de blocos
 app.get("/blocks", (req, res) => {
     res.json(bc.chain)
 })
@@ -23,6 +23,8 @@ app.get("/blocks", (req, res) => {
 app.post("/mine", (req, res) => {
     const block = bc.addBlock(req.body.data)
     console.log(`New block added: ${block.toString()}`)
+
+    p2pServer.syncChain()
 
     res.redirect("/blocks")
 })
